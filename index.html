@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: A Carreira de Engenheiro de Dados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: A focused, single-page infographic detailing the Data Engineer career path. The narrative starts with high-impact market data (growth and salary potential) to establish relevance. It then delves into the core aspects of the role: responsibilities, required skills (hard/soft), and concludes with an actionable career roadmap. This structure is designed to be a comprehensive guide for aspiring Data Engineers. -->
+    <!-- Visualization & Content Choices: 
+        - Data Point: Hiring growth stat (25.87%). -> Goal: Inform. -> Chosen Visualization: Single Big Number (HTML/Tailwind). -> Justification: Maximizes the impact of this key market trend indicator.
+        - Data Point: Salary progression by seniority. -> Goal: Compare/Change. -> Chosen Visualization: Bar Chart (Chart.js). -> Justification: Clearly visualizes the significant financial growth potential as a professional advances in their career.
+        - Data Point: Hard skills demand. -> Goal: Rank/Compare. -> Chosen Visualization: Horizontal Bar Chart (Chart.js). -> Justification: Effectively ranks the most critical technologies and accommodates longer labels.
+        - Data Point: Career development phases. -> Goal: Organize. -> Chosen Visualization: Flow Chart style layout (HTML/Tailwind). -> Justification: Presents the learning path as a clear, step-by-step process.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 450px;
+            max-height: 60vh;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#0043A3] tracking-tight">O Arquiteto de Dados</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Um guia visual completo sobre a carreira de <span class="font-semibold">Engenheiro de Dados</span>, a profissão que constrói o futuro da informação no Brasil.</p>
+        </header>
+
+        <section class="my-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#0043A3]">Mercado em Alta: Crescimento e Potencial Salarial</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 text-center">
+                     <p class="text-lg text-gray-600 mb-2">Crescimento nas contratações formais (últimos 12 meses):</p>
+                    <div class="text-7xl md:text-8xl font-extrabold text-[#F28522]">25,87%</div>
+                    <p class="text-sm text-gray-500 mt-2">Fonte: CAGED</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <div class="chart-container h-[300px] max-h-[40vh]">
+                        <canvas id="senioritySalaryChart"></canvas>
+                    </div>
+                     <p class="text-xs text-center text-gray-500 mt-4">Progressão salarial média no Brasil (R$)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#0043A3]">A Missão: Construindo os Fluxos de Dados</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 text-center">
+                <div class="text-5xl mb-4">🏗️</div>
+                <h3 class="text-xl font-bold mb-2">Foco e Responsabilidades</h3>
+                <p class="text-gray-600 max-w-3xl mx-auto">O Engenheiro de Dados projeta, constrói e mantém a infraestrutura e os <span class="font-semibold">*pipelines*</span> que permitem coletar, transformar e transportar dados em larga escala. Sua missão é habilitar o <span class="font-semibold">uso do dado</span>, tornando-o acessível e confiável para analistas, cientistas de dados e outras aplicações de negócio.</p>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#0043A3]">O Arsenal Tecnológico (Hard Skills)</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h3 class="text-xl font-bold mb-4 text-center">Tecnologias Mais Demandadas</h3>
+                <div class="chart-container h-96">
+                    <canvas id="engSkillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#0043A3]">O Fator Humano (Soft Skills)</h2>
+             <div class="grid sm:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="text-4xl">💡</span>
+                    <h3 class="text-lg font-bold my-2">Pensamento Analítico</h3>
+                    <p class="text-sm text-gray-600">Traduzir requisitos de negócio em soluções técnicas robustas.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="text-4xl">🗣️</span>
+                    <h3 class="text-lg font-bold my-2">Comunicação Clara</h3>
+                    <p class="text-sm text-gray-600">Interagir com stakeholders técnicos e de negócio de forma eficaz.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="text-4xl">🔄</span>
+                    <h3 class="text-lg font-bold my-2">Adaptabilidade</h3>
+                    <p class="text-sm text-gray-600">Aprender continuamente em um campo que está sempre em evolução.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#0043A3]">Construa seu Plano de Carreira</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="relative pl-8">
+                    <div class="absolute left-0 top-0 h-full w-0.5 bg-gray-300"></div>
+                    <div class="mb-10 relative">
+                        <div class="absolute -left-[38px] top-1 w-6 h-6 rounded-full bg-[#F28522] border-4 border-white flex items-center justify-center text-white font-bold text-sm">1</div>
+                        <h4 class="font-bold text-lg">Fundamentos de Engenharia</h4>
+                        <p class="text-gray-600">Dominar Python para dados (Pandas) e controle de versão (Git).</p>
+                    </div>
+                    <div class="mb-10 relative">
+                        <div class="absolute -left-[38px] top-1 w-6 h-6 rounded-full bg-[#F28522] border-4 border-white flex items-center justify-center text-white font-bold text-sm">2</div>
+                        <h4 class="font-bold text-lg">O Pilar SQL</h4>
+                        <p class="text-gray-600">Aprofundar em SQL avançado (window functions, CTEs, otimização).</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-[38px] top-1 w-6 h-6 rounded-full bg-[#F28522] border-4 border-white flex items-center justify-center text-white font-bold text-sm">3</div>
+                        <h4 class="font-bold text-lg">Ecossistema e Cloud</h4>
+                        <p class="text-gray-600">Estudar Spark, Airflow e construir um pipeline de ponta a ponta na nuvem (AWS/GCP).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 }).format(value);
+
+        const senioritySalaryCtx = document.getElementById('senioritySalaryChart').getContext('2d');
+        new Chart(senioritySalaryCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Estágio', 'Júnior', 'Pleno', 'Sênior'],
+                datasets: [{
+                    label: 'Média Salarial (R$)',
+                    data: [2500, 12362.95, 16524.29, 21345.11],
+                    backgroundColor: [
+                        '#a8a29e', 
+                        '#00A3E0', 
+                        '#0043A3', 
+                        '#0c2a50'
+                    ],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { 
+                            title: tooltipTitleCallback,
+                            label: (context) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: (value) => `R$ ${value / 1000}k`
+                        }
+                    }
+                }
+            }
+        });
+        
+        const engSkillsCtx = document.getElementById('engSkillsChart').getContext('2d');
+        new Chart(engSkillsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Python', 'SQL', 'Cloud (AWS/GCP)', ['Ecossistema', 'Big Data (Spark)'], ['Orquestração', '(Airflow)']],
+                datasets: [{
+                    label: 'Nível de Demanda',
+                    data: [100, 100, 95, 90, 85],
+                    backgroundColor: '#F2BE22',
+                    borderColor: '#F28522',
+                    borderWidth: 1,
+                    borderRadius: 3
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { suggestedMax: 100, display: false },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
